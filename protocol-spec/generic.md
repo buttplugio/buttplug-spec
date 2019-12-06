@@ -269,4 +269,60 @@ sequenceDiagram
   }
 ]
 ```
+---
+## ShockCmd
+**Description:** Causes a device that supports shocks/estim to deliver
+a static shock at a certain strength for a certain period of time. The
+attributes for this device in
+[DeviceList](enumeration.md#devicelist)/[DeviceAdded](enumeration.md#deviceadded)
+message will have the following information:
 
+- FeatureCount: Number of shock channels available on device (i.e.
+  usually one on a collar, 2 on an ET-312, etc...)
+- StepCount: Number of shock strength levels per channel
+
+**Introduced In Spec Version:** 2
+
+**Last Updated In Spec Version:** 2
+
+**Fields:**
+
+* _Id_ (unsigned int): Message Id
+* _DeviceIndex_ (unsigned int): Index of device
+* _Shocks_ (array): Shock strength/duration
+  * _Index_ (unsigned int): Index of rotation motor
+  * _Strength_ (double): Shock strength with a range of [0.0-1.0]
+  * _Duration_ (unsigned int): Duration of shock, in milliseconds.
+
+**Expected Response:**
+
+* Ok message with matching Id on successful request.
+* Error message on value or message error.
+
+**Flow Diagram:**
+
+<mermaid>
+sequenceDiagram
+    Client->>+Server: ShockCmd Id=1
+    Server->>-Client: Ok Id=1
+</mermaid>
+
+**Serialization Example:**
+
+```json
+[
+  {
+    "ShockCmd": {
+      "Id": 1,
+      "DeviceIndex": 0,
+      "Shocks": [
+        {
+          "Index": 0,
+          "Strength": 0.5,
+          "Duration": 500
+        }
+      ]
+    }
+  }
+]
+```
