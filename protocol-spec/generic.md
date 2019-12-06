@@ -271,6 +271,7 @@ sequenceDiagram
 ```
 ---
 ## ShockCmd
+
 **Description:** Causes a device that supports shocks/estim to deliver
 a static shock at a certain strength for a certain period of time. The
 attributes for this device in
@@ -322,6 +323,52 @@ sequenceDiagram
           "Duration": 500
         }
       ]
+    }
+  }
+]
+```
+---
+## PatternCmd
+
+**Description:** Causes a device that supports pattern playback to
+start playing a pattern. The attributes for this device in
+[DeviceList](enumeration.md#devicelist)/[DeviceAdded](enumeration.md#deviceadded)
+message will have the following information:
+
+- _Patterns_ (list of strings): Names of patterns that can be played on the device
+
+**Introduced In Spec Version:** 2
+
+**Last Updated In Spec Version:** 2
+
+**Fields:**
+
+* _Id_ (unsigned int): Message Id
+* _DeviceIndex_ (unsigned int): Index of device
+* _Pattern_ (string): Pattern to start playing
+
+**Expected Response:**
+
+* Ok message with matching Id on successful request.
+* Error message on value or message error.
+
+**Flow Diagram:**
+
+<mermaid>
+sequenceDiagram
+    Client->>+Server: PatternCmd Id=1
+    Server->>-Client: Ok Id=1
+</mermaid>
+
+**Serialization Example:**
+
+```json
+[
+  {
+    "PatternCmd": {
+      "Id": 1,
+      "DeviceIndex": 0,
+      "Pattern": "wave"
     }
   }
 ]
