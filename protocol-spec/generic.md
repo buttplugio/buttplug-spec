@@ -290,7 +290,7 @@ message will have the following information:
 
 * _Id_ (unsigned int): Message Id
 * _DeviceIndex_ (unsigned int): Index of device
-* _Pattern_ (array of index/strength/string pairs): Patterns to start playing on actuators
+* _Patterns_ (array of index/strength/string objects): Patterns to start playing on actuators
 
 **Expected Response:**
 
@@ -316,7 +316,8 @@ sequenceDiagram
       "Patterns": [
           {
               "Index": 0,
-              "Pattern": "wave"
+              "Pattern": "wave",
+              "Strength": 0.5
           }
       ]
     }
