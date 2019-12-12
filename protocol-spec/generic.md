@@ -382,11 +382,15 @@ sequenceDiagram
 ]
 ```
 ---
-## ToneCmd
+## ToneEmitterCmd
 
 **Description:** Causes a device that supports playing a tone to emit
 the tone for a certain amount of time. This will most likely be used
 to collars and other training devices.
+
+The commands is called "ToneEmitter" as just using "Tone" was a little
+difficult to discern, as we may have an audio generator message for
+controlling audio vibrators at some point in the future.
 
 **Introduced In Spec Version:** 2
 
@@ -396,7 +400,10 @@ to collars and other training devices.
 
 * _Id_ (unsigned int): Message Id
 * _DeviceIndex_ (unsigned int): Index of device
-* _Duration_ (unsigned int): Amount of time to play tone for, in milliseconds.
+* _Tones_ (array): Tone duration/volume
+  * _Index_ (unsigned int): Emitter index
+  * _Duration_ (unsigned int): Amount of time to play tone for, in milliseconds.
+  * _Volume_ (double): Volume level (with steps denoted by StepCount message attribute)
 
 **Expected Response:**
 
@@ -407,7 +414,7 @@ to collars and other training devices.
 
 <mermaid>
 sequenceDiagram
-    Client->>+Server: ToneCmd Id=1
+    Client->>+Server: ToneEmitterCmd Id=1
     Server->>-Client: Ok Id=1
 </mermaid>
 
@@ -416,10 +423,16 @@ sequenceDiagram
 ```json
 [
   {
-    "ToneCmd": {
+    "ToneEmitterCmd": {
       "Id": 1,
       "DeviceIndex": 0,
-      "Duration": 500
+      "Tones": [
+        {
+          "Index": 0,
+          "Volume": 0.5,
+          "Duration": 500
+        }
+      ]
     }
   }
 ]
