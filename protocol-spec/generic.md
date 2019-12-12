@@ -270,14 +270,17 @@ sequenceDiagram
 ]
 ```
 ---
-## PatternCmd
+## PatternPlaybackCmd
 
 **Description:** Causes a device that supports pattern playback to
 start playing a pattern. The attributes for this device in
 [DeviceList](enumeration.md#devicelist)/[DeviceAdded](enumeration.md#deviceadded)
 message will have the following information:
 
-- _Patterns_ (list of strings): Names of patterns that can be played on the device
+- _FeatureCount_ (unsigned integer): Number of pattern playback actuators
+- _StepCount_ (list of unsigned int): Steps of pattern playback strength per actuator
+- _ActuatorType_ (list of strings): One of "Vibrate", "Linear", "Rotate", "Estim"
+- _Patterns_ (list of lists of strings): Names of patterns that can be played on the device, per actuator
 
 **Introduced In Spec Version:** 2
 
@@ -287,7 +290,7 @@ message will have the following information:
 
 * _Id_ (unsigned int): Message Id
 * _DeviceIndex_ (unsigned int): Index of device
-* _Pattern_ (string): Pattern to start playing
+* _Pattern_ (array of index/strength/string pairs): Patterns to start playing on actuators
 
 **Expected Response:**
 
@@ -298,7 +301,7 @@ message will have the following information:
 
 <mermaid>
 sequenceDiagram
-    Client->>+Server: PatternCmd Id=1
+    Client->>+Server: PatternPlaybackCmd Id=1
     Server->>-Client: Ok Id=1
 </mermaid>
 
@@ -307,10 +310,15 @@ sequenceDiagram
 ```json
 [
   {
-    "PatternCmd": {
+    "PatternPlaybackCmd": {
       "Id": 1,
       "DeviceIndex": 0,
-      "Pattern": "wave"
+      "Patterns": [
+          {
+              "Index": 0,
+              "Pattern": "wave"
+          }
+      ]
     }
   }
 ]
