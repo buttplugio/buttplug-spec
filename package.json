@@ -22,6 +22,6 @@
     "mermaid": "^8.4.2",
     "vuepress": "^1.2.0",
     "vuepress-plugin-matomo": "^1.0.2",
-    "yarn": "^1.19.1"
+    "yarn": "^1.22.0"
   }
 }
