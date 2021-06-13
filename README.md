@@ -1,4 +1,6 @@
-# Buttplug Protocol and Architecture Documentation
+# Buttplug Protocol and Architecture Documentation - DEPRECATED, see buttplug repo
+
+**THIS REPO HAS BEEN DEPRECATED AND ARCHIVED** - Spec is now in the main buttplug repo at [https://github.com/buttplugio/buttplug](https://github.com/buttplugio/buttplug)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ca7221a2-36a6-4362-8459-07a4428c60b4/deploy-status)](https://app.netlify.com/sites/buttplug-spec/deploys)
 
